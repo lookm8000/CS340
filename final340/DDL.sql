@@ -55,11 +55,13 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- Inserting data into tables
 INSERT INTO `Customers` (`email`) VALUES 
 ('customer1@example.com'), 
-('customer2@example.com');
+('customer2@example.com'),
+('customer3@example.com');
 
 INSERT INTO `Rooms` (`Room_type`, `Prices_per_night`) VALUES 
 ('Standard Suite', 110.00), 
-('Premium Suite', 140.00);
+('Premium Suite', 140.00),
+('Deluxe Suite', 180.00);
 
 INSERT INTO `Resort_Activities` (`Name`, `Description`, `Location`, `Availability`, `price`) VALUES 
 ('Whale Watching', 'Experience the majestic beauty of whales in their natural habitat.', 'Coastline', TRUE, 60.00),
@@ -69,7 +71,8 @@ INSERT INTO `Resort_Activities` (`Name`, `Description`, `Location`, `Availabilit
 -- Make sure the customer_IDs are correctly referring to existing records in the Customers table
 INSERT INTO `Reservation` (`customer_ID`, `room_ID`, `Checkin_date`, `Checkout_date`, `Total_price`) VALUES 
 (1, 1, '2024-07-01', '2024-07-05', 440.00),
-(2, 2, '2024-08-15', '2024-08-20', 700.00);
+(2, 2, '2024-08-15', '2024-08-20', 700.00),
+(3, 3, '2024-09-20', '2024-09-25', 700.00);
 
 -- Assuming activity_IDs 1, 2, and 3 are valid after the above insertions
 INSERT INTO `Reservation_Resort_Activities` (`reservation_ID`, `activity_ID`) VALUES 
