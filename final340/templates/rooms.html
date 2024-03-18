@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Rooms{% endblock %}
+{% block header %}<h1>Rooms</h1>{% endblock %}
+{% block body %}
+<div>
+  <p><strong>Available Rooms</strong></p>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Room ID</th>
+        <th>Type</th>
+        <th>Price per Night</th>
+        <!-- Add more room attributes as needed -->
+      </tr>
+    </thead>
+    <tbody>
+      {% for room in rooms_data %}
+      <tr>
+        <td>{{ room.id }}</td>
+        <td>{{ room.type }}</td>
+        <td>{{ room.price_per_night }}</td>
+        <!-- Display more room attributes here -->
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<p>&nbsp;</p>
+<div>
+  <form method="POST" action="/add-room"> <!-- Update this action as needed -->
+    <legend><strong>Add New Room</strong></legend>
+    <fieldset>
+      <!-- Input fields for adding a new room -->
+      <label>Room Type:</label> 
+      <input type="text" name="type" required>
+      
+      <label>Price per Night:</label> 
+      <input type="number" name="price_per_night" required>
+      
+      <!-- Add more input fields for other room attributes -->
+      
+    </fieldset>
+    <input type="submit" value="Add Room">
+  </form>
+</div>
+{% endblock %}

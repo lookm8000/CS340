@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Activities & Experiences Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table, td, th {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        .action-button {
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+            margin-left: 10px;
+        }
+        button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="content">
+    <h2>Manage Activities & Experiences</h2>
+    <p>Add or remove thrilling activities and unique experiences, tailored to delight and inspire.</p>
+
+    <h3>Add New Activity</h3>
+    <form id="addActivityForm">
+        <input type="text" id="newActivityName" placeholder="Activity Name" required>
+        <input type="text" id="newActivityTimes" placeholder="Times" required>
+        <input type="text" id="newActivityInstructor" placeholder="Instructor" required>
+        <input type="text" id="newActivityPrice" placeholder="Price" required>
+        <button type="submit">Add Activity</button>
+
+    </form>
+
+    <h3>Current Activities</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Activity</th>
+                <th>Times</th>
+                <th>Instructor</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="activitiesTable">
+            <!-- Activities will be dynamically populated here -->
+        </tbody>
+    </table>
+</div>
+
+<!-- Include the JavaScript file here -->
+<script src="activitymanager.js"></script>
+
+</body>
+</html>

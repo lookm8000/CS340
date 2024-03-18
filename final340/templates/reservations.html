@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Book Your Stay</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+                color: #333; /* Keeping text color dark for readability */
+            }
+            .form-group {
+                margin-bottom: 15px;
+            }
+            label {
+                display: block;
+                margin-bottom: 5px;
+            }
+            select, input[type="date"], input[type="text"], button {
+                width: 100%;
+                padding: 8px;
+                margin-top: 5px;
+                box-sizing: border-box;
+            }
+            button {
+                background-color: #005f73; /* Primary blue */
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #005f73; /* Darker blue */
+            }
+            .feedback {
+                margin-top: 20px;
+                color: #004085; /* Feedback text color */
+                background-color: #cce5ff; /* Light blue background */
+                border-color: #b8daff; /* Lighter blue border */
+                padding: 10px;
+                border-radius: 5px;
+                display: none;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+            th, td {
+                border: 1px solid #005f73; /* Blue borders for table */
+                padding: 8px;
+                text-align: left;
+            }
+            th {
+                background-color: #005f73; /* Blue background for headers */
+                color: white; /* White text color for headers */
+            }
+        </style>
+    </head>
+<body>
+
+<div class="content">
+    <h2>Book Your Stay</h2>
+    <p>Use our simple online booking system to secure your reservation. Start planning your unforgettable getaway today!</p>
+    <form id="bookingForm">
+        <div class="form-group">
+            <label for="guestName">Name:</label>
+            <input type="text" id="guestName" name="guestName" required>
+        </div>
+        <div class="form-group">
+            <label for="contactNumber">Contact Number:</label>
+            <input type="text" id="contactNumber" name="contactNumber" required>
+        </div>
+        <div class="form-group">
+            <label for="roomType">Room Type:</label>
+            <select id="roomType" name="roomType">
+                <option value="standard">Standard Suite</option>
+                <option value="premium">Premium Suite</option>
+                <option value="deluxe">Deluxe Suite</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="checkIn">Check-in Date:</label>
+            <input type="date" id="checkIn" name="checkIn" required>
+        </div>
+        <div class="form-group">
+            <label for="checkOut">Check-out Date:</label>
+            <input type="date" id="checkOut" name="checkOut" required>
+        </div>
+        <button type="submit">Book Now</button>
+    </form>
+    <div id="feedback" class="feedback"></div>
+
+    <h2>Reservations</h2>
+    <table id="reservationsTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Contact Number</th>
+                <th>Room Type</th>
+                <th>Room Number</th>
+                <th>Duration (Days)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Reservation rows will be added here -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    const reservations = [
+        { name: 'Keoe Hoe', contact: '123-456-7890', roomType: 'Deluxe Suite', roomNumber: 101, duration: 3 },
+        { name: 'Evany Noriega', contact: '987-654-3210', roomType: 'Standard Suite', roomNumber: 102, duration: 2 },
+        { name: 'Isable Uyesaka', contact: '456-789-1230', roomType: 'Premium Suite', roomNumber: 201, duration: 4 },
+        { name: 'Cade Buchana', contact: '789-123-4560', roomType: 'Deluxe Suite', roomNumber: 103, duration: 5 },
+        { name: 'Reece Morgan', contact: '321-654-9870', roomType: 'Standard Suite', roomNumber: 104, duration: 1 },
+        { name: 'Jennier Coffman', contact: '654-321-7890', roomType: 'Premium Suite', roomNumber: 202, duration: 3 },
+    ];
+
+    function populateReservationsTable() {
+        const tableBody = document.getElementById('reservationsTable').getElementsByTagName('tbody')[0];
+        tableBody.innerHTML = ''; // Clear current rows
+        reservations.forEach(res => {
+            let row = `<tr>
+                <td>${res.name}</td>
+                <td>${res.contact}</td>
+                <td>${res.roomType}</td>
+                <td>${res.roomNumber}</td>
+                <td>${res.duration}</td>
+            </tr>`;
+            tableBody.innerHTML += row;
+        });
+    }
+
+    document.getElementById('bookingForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission to server
+        // Existing validation and feedback code here
+
+        // Assuming validation passed and room is booked:
+        const guestName = document.getElementById('guestName').value;
+        const contactNumber = document.getElementById('contactNumber').value;
+        const roomType = document.getElementById('roomType').value;
+        const checkInDate = new Date(document.getElementById('checkIn').value);
+        const checkOutDate = new Date(document.getElementById('checkOut').value);
+        const roomNumber = Math.floor(Math.random() * 100) + 100; // Simple random room number assignment
+        const duration = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24); // Calculate duration in days
+
+        reservations.push({ name: guestName, contact: contactNumber, roomType, roomNumber, duration });
+        populateReservationsTable();
+
+        // Reset form or show success feedback
+    });
+
+    populateReservationsTable(); // Initial population of the table
+</script>
+
+</body>
+</html>

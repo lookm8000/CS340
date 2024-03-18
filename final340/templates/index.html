@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Our Hotel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Our Hotel</h1>
+    </header>
+    <nav class="webpages">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="/activities.html">Activities</a>
+         <a href="/rooms.html">Rooms</a>
+        <a href="/reservations.html">Reservations</a>
+        
+    </nav>
+    <div class="content">
+        <h2>About Us</h2>
+        <p>Welcome to our Hotel, your perfect getaway located at the heart of the city. Enjoy luxurious rooms, world-class amenities, and a wide range of activities designed to make your stay unforgettable.</p>
+        <h3>Our Rooms</h3>
+        <p>Discover our variety of room options, each tailored to meet your needs and ensure a comfortable stay.</p>
+        <h3>Activities & Experiences</h3>
+        <p>From relaxing spa treatments to exciting outdoor adventures, we have something for everyone.</p>
+        <h3>Make a Reservation</h3>
+        <p>Ready to book your stay? Click on the Reservations link to start planning your trip.</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Our Hotel. All rights reserved.</p>
+    </footer>
+    
+</body>
+</html>
