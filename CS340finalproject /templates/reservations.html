@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservations Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding-bottom: 30px;
+        }
+
+        h2 {
+            color: #005f73;
+            margin-top: 20px;
+        }
+
+        h3 {
+            color: #004a5e;
+            margin-top: 20px;
+        }
+
+        p {
+            line-height: 1.5;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input[type="email"],
+        select,
+        input[type="date"],
+        button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #005f73;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #004a5e;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #005f73;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #005f73;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="content">
+    <h2>Manage Reservations</h2>
+    <p>View and manage all reservations made by customers.</p>
+
+    <h3>Add New Reservation</h3>
+    <form method="POST" action="/add_reservation">
+        <label for="email">Customer Email:</label>
+        <input type="email" id="email" name="email" placeholder="Customer Email" required>
+        <label for="roomType">Room Type:</label>
+        <select id="roomType" name="roomType" required>
+            <option value="standard">Standard Suite</option>
+            <option value="premium">Premium Suite</option>
+            <option value="deluxe">Deluxe Suite</option>
+        </select>
+        <label for="checkIn">Check-in Date:</label>
+        <input type="date" id="checkIn" name="checkIn" placeholder="Check-in Date" required>
+        <label for="checkOut">Check-out Date:</label>
+        <input type="date" id="checkOut" name="checkOut" placeholder="Check-out Date" required>
+        <button type="submit">Book Now</button>
+    </form>
+
+    <h3>Current Reservations</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Customer Email</th>
+                <th>Room Type</th>
+                <th>Check-in Date</th>
+                <th>Check-out Date</th>
+                <th>Total Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.email }}</td>
+                <td>{{ reservation.roomType }}</td>
+                <td>{{ reservation.checkIn }}</td>
+                <td>{{ reservation.checkOut }}</td>
+                <td>${{ '%.2f' % reservation.totalPrice }}</td>
+                <td>
+                    <form action="/delete_reservation/{{ reservation.reservationID }}" method="POST" onsubmit="return confirm('Are you sure you want to cancel this reservation?');">
+                        <button type="submit">Cancel</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

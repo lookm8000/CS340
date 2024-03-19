@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rooms Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding-bottom: 30px;
+        }
+
+        h2 {
+            color: #005f73;
+            margin-top: 20px;
+        }
+
+        h3 {
+            color: #004a5e;
+            margin-top: 20px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #005f73;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #004a5e;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #005f73;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #005f73;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h2>Manage Rooms</h2>
+        <h3>Add New Room</h3>
+        <form method="POST" action="/add-room">
+            <input type="text" name="type" placeholder="Room Type" required>
+            <input type="number" name="price_per_night" placeholder="Price per Night" required>
+            <button type="submit">Add Room</button>
+        </form>
+
+        <h3>Current Rooms</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Room ID</th>
+                    <th>Type</th>
+                    <th>Price per Night</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for room in rooms %}
+                <tr>
+                    <td>{{ room.id }}</td>
+                    <td>{{ room.type }}</td>
+                    <td>${{ room.price_per_night }}</td>
+                    <td>
+                        <form method="POST" action="/delete-room/{{ room.id }}">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
